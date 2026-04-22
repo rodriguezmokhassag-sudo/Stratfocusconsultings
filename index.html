@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STRAT FOCUS CONSULTING — Performance Commerciale & Marketing d'Innovation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0D2B6E;
+  --navy-deep: #081A45;
+  --navy-light: #1a3a82;
+  --gold: #C9A84C;
+  --gold-light: #E8C96A;
+  --gold-pale: #FDF6E3;
+  --white: #FFFFFF;
+  --gray-light: #F4F6FB;
+  --gray-mid: #E8EDF7;
+  --gray-text: #555E7A;
+  --dark: #1A1A2E;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--dark);
+  background: var(--white);
+  overflow-x: hidden;
+}
+
+/* ── NAVIGATION ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(13, 43, 110, 0.97);
+  backdrop-filter: blur(12px);
+  padding: 0 5%;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 72px;
+  border-bottom: 2px solid var(--gold);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+}
+
+.nav-logo {
+  display: flex; align-items: center; gap: 12px; text-decoration: none;
+}
+.nav-logo-icon {
+  width: 42px; height: 42px;
+  background: var(--gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+.nav-logo-text { display: flex; flex-direction: column; }
+.nav-logo-text span:first-child {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700; font-size: 13px;
+  color: var(--white); letter-spacing: 1.5px;
+}
+.nav-logo-text span:last-child {
+  font-size: 9px; color: var(--gold); letter-spacing: 2px;
+  font-weight: 500;
+}
+
+.nav-links {
+  display: flex; align-items: center; gap: 6px; list-style: none;
+}
+.nav-links a {
+  text-decoration: none; color: rgba(255,255,255,0.85);
+  font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 8px 14px; border-radius: 4px;
+  transition: all 0.3s;
+}
+.nav-links a:hover { color: var(--gold); background: rgba(201,168,76,0.1); }
+.nav-links a.active { color: var(--gold); }
+
+.lang-switcher {
+  display: flex; gap: 6px;
+}
+.lang-btn {
+  background: transparent; border: 1px solid rgba(201,168,76,0.4);
+  color: var(--gold); font-size: 10px; font-weight: 700;
+  letter-spacing: 1px; padding: 5px 10px; border-radius: 3px;
+  cursor: pointer; transition: all 0.3s; font-family: 'Montserrat', sans-serif;
+}
+.lang-btn:hover, .lang-btn.active {
+  background: var(--gold); color: var(--navy);
+}
+
+/* ── PAGES ── */
+.page { display: none; padding-top: 72px; }
+.page.active { display: block; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 50%, var(--navy-light) 100%);
+  position: relative; overflow: hidden;
+  display: flex; align-items: center;
+}
+
+.hero-bg-pattern {
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(201,168,76,0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(201,168,76,0.06) 0%, transparent 40%),
+    radial-gradient(circle at 60% 80%, rgba(255,255,255,0.03) 0%, transparent 40%);
+}
+
+.hero-grid {
+  position: absolute; inset: 0; opacity: 0.04;
+  background-image: linear-gradient(var(--gold) 1px, transparent 1px),
+    linear-gradient(90deg, var(--gold) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 0 8%; max-width: 1200px; margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+}
+
+.hero-left { animation: fadeInLeft 1s ease forwards; }
+
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4);
+  padding: 6px 16px; border-radius: 20px; margin-bottom: 32px;
+}
+.hero-tag span { font-size: 11px; color: var(--gold); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; }
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(42px, 5vw, 68px);
+  font-weight: 700; color: var(--white);
+  line-height: 1.1; margin-bottom: 24px;
+}
+.hero-title .gold { color: var(--gold); }
+
+.hero-subtitle {
+  font-size: 15px; color: rgba(255,255,255,0.75);
+  line-height: 1.8; margin-bottom: 40px; max-width: 500px;
+}
+
+.hero-promise {
+  background: rgba(201,168,76,0.12);
+  border-left: 4px solid var(--gold);
+  padding: 20px 24px; border-radius: 0 8px 8px 0;
+  margin-bottom: 40px;
+}
+.hero-promise p {
+  font-size: 16px; color: var(--gold);
+  font-style: italic; font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+}
+
+.hero-cta {
+  display: flex; gap: 16px; flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: var(--gold); color: var(--navy);
+  padding: 16px 32px; border-radius: 4px;
+  font-size: 12px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; text-decoration: none;
+  transition: all 0.3s; display: inline-block;
+  box-shadow: 0 8px 24px rgba(201,168,76,0.3);
+}
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(201,168,76,0.4); }
+
+.btn-secondary {
+  background: transparent; color: var(--white);
+  padding: 16px 32px; border-radius: 4px;
+  font-size: 12px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; text-decoration: none;
+  border: 2px solid rgba(255,255,255,0.4);
+  transition: all 0.3s; display: inline-block;
+}
+.btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+.hero-right {
+  display: flex; flex-direction: column; gap: 20px;
+  animation: fadeInRight 1s ease 0.3s both;
+}
+
+.hero-stat-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 12px; padding: 24px 28px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s;
+}
+.hero-stat-card:hover { background: rgba(255,255,255,0.1); border-color: var(--gold); transform: translateX(8px); }
+
+.hero-stat-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px; font-weight: 700; color: var(--gold);
+  line-height: 1;
+}
+.hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 6px; letter-spacing: 1px; }
+
+.hero-sectors {
+  display: flex; gap: 12px; flex-wrap: wrap;
+}
+.sector-pill {
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+  padding: 8px 18px; border-radius: 20px;
+  font-size: 12px; color: rgba(255,255,255,0.8); font-weight: 500;
+}
+
+/* ── SECTIONS ── */
+.section { padding: 100px 8%; }
+.section-light { background: var(--gray-light); }
+.section-navy { background: var(--navy); }
+.section-white { background: var(--white); }
+
+.section-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 12px; display: block;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 700; line-height: 1.2;
+  margin-bottom: 20px;
+}
+.section-title.light { color: var(--white); }
+.section-title.dark { color: var(--navy); }
+.section-subtitle {
+  font-size: 15px; color: var(--gray-text);
+  line-height: 1.8; max-width: 620px;
+}
+.section-subtitle.light { color: rgba(255,255,255,0.75); }
+
+.section-header { margin-bottom: 64px; }
+.section-header.centered { text-align: center; }
+.section-header.centered .section-subtitle { margin: 0 auto; }
+
+/* ── OFFERS ── */
+.offers-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+  max-width: 1200px; margin: 0 auto;
+}
+
+.offer-card {
+  background: var(--white); border-radius: 16px;
+  overflow: hidden; box-shadow: 0 4px 24px rgba(13,43,110,0.08);
+  transition: all 0.4s; position: relative;
+}
+.offer-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(13,43,110,0.15); }
+
+.offer-card-header {
+  padding: 36px 32px 28px;
+  position: relative; overflow: hidden;
+}
+.offer-card-header.navy { background: var(--navy); }
+.offer-card-header.gold { background: var(--gold); }
+.offer-card-header.light { background: var(--gray-mid); }
+
+.offer-icon { font-size: 40px; margin-bottom: 16px; display: block; }
+.offer-name {
+  font-size: 13px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.offer-name.white { color: var(--white); }
+.offer-name.navy { color: var(--navy); }
+.offer-tagline {
+  font-size: 13px; font-style: italic;
+}
+.offer-tagline.gold-c { color: var(--gold); }
+.offer-tagline.navy-c { color: var(--navy); opacity: 0.7; }
+
+.offer-card-body { padding: 28px 32px 32px; }
+.offer-meta { display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+.offer-meta-item {
+  font-size: 11px; color: var(--gray-text); font-weight: 500;
+}
+.offer-meta-item strong { color: var(--navy); }
+
+.offer-livrables { list-style: none; margin-bottom: 28px; }
+.offer-livrables li {
+  font-size: 13px; color: var(--gray-text);
+  padding: 8px 0; border-bottom: 1px solid var(--gray-mid);
+  display: flex; align-items: flex-start; gap: 10px;
+}
+.offer-livrables li::before {
+  content: "–"; color: var(--gold); font-weight: 700; flex-shrink: 0;
+}
+.offer-promise {
+  background: var(--gold-pale); border-left: 3px solid var(--gold);
+  padding: 14px 16px; border-radius: 0 6px 6px 0;
+  font-size: 13px; color: var(--navy); font-style: italic;
+}
+
+/* ── WHY US ── */
+.why-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  max-width: 1100px; margin: 0 auto;
+}
+.why-card {
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 12px; padding: 32px 28px;
+  transition: all 0.3s;
+}
+.why-card:hover { background: rgba(255,255,255,0.1); border-color: var(--gold); }
+.why-icon { font-size: 32px; margin-bottom: 16px; display: block; }
+.why-title { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 10px; }
+.why-desc { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.7; }
+
+/* ── ABOUT PAGE ── */
+.about-hero {
+  background: linear-gradient(135deg, var(--navy-deep), var(--navy));
+  padding: 80px 8%; text-align: center; position: relative; overflow: hidden;
+}
+.about-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(201,168,76,0.1) 0%, transparent 70%);
+}
+
+.about-content {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+}
+
+.about-founder {
+  background: var(--navy);
+  border-radius: 16px; padding: 48px 40px; text-align: center;
+  border: 1px solid rgba(201,168,76,0.2);
+}
+.founder-avatar {
+  width: 120px; height: 120px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  margin: 0 auto 24px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 48px; border: 4px solid rgba(255,255,255,0.1);
+}
+.founder-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; font-weight: 700; color: var(--white); margin-bottom: 8px;
+}
+.founder-title { font-size: 12px; color: var(--gold); letter-spacing: 2px; margin-bottom: 24px; }
+.founder-bio { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.8; text-align: left; }
+
+.about-text .section-title { color: var(--navy); }
+.about-text p { font-size: 14px; color: var(--gray-text); line-height: 1.9; margin-bottom: 20px; }
+
+.values-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+.value-item {
+  background: var(--gray-light); border-radius: 10px; padding: 20px;
+  border-left: 3px solid var(--gold);
+}
+.value-title { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.value-desc { font-size: 12px; color: var(--gray-text); line-height: 1.6; }
+
+/* ── OFFERS PAGE ── */
+.offers-page-hero {
+  background: linear-gradient(135deg, var(--navy-deep), var(--navy));
+  padding: 80px 8%; text-align: center;
+}
+.offers-flow {
+  display: flex; align-items: center; justify-content: center;
+  gap: 16px; margin: 48px 0 0; flex-wrap: wrap;
+}
+.flow-item {
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(201,168,76,0.3);
+  padding: 16px 24px; border-radius: 8px; text-align: center; min-width: 160px;
+}
+.flow-item .icon { font-size: 28px; margin-bottom: 8px; }
+.flow-item .name { font-size: 12px; font-weight: 700; color: var(--white); letter-spacing: 1px; }
+.flow-item .desc { font-size: 11px; color: var(--gold); margin-top: 4px; }
+.flow-arrow { font-size: 24px; color: var(--gold); }
+
+/* ── CONTACT PAGE ── */
+.contact-hero {
+  background: linear-gradient(135deg, var(--navy-deep), var(--navy));
+  padding: 80px 8%; text-align: center;
+}
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+  max-width: 1000px; margin: 0 auto;
+}
+.contact-info h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; color: var(--navy); margin-bottom: 32px;
+}
+.contact-item {
+  display: flex; gap: 16px; align-items: flex-start; margin-bottom: 28px;
+}
+.contact-item-icon {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--navy); display: flex; align-items: center;
+  justify-content: center; font-size: 20px; flex-shrink: 0;
+}
+.contact-item-text strong { display: block; font-size: 13px; color: var(--navy); margin-bottom: 4px; }
+.contact-item-text span { font-size: 13px; color: var(--gray-text); }
+
+.contact-form { background: var(--gray-light); border-radius: 16px; padding: 40px; }
+.contact-form h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px; color: var(--navy); margin-bottom: 28px;
+}
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; font-size: 11px; font-weight: 700; color: var(--navy); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; padding: 14px 16px; border: 2px solid var(--gray-mid);
+  border-radius: 6px; font-family: 'Montserrat', sans-serif; font-size: 13px;
+  background: var(--white); color: var(--dark); transition: border-color 0.3s;
+  outline: none;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  border-color: var(--navy);
+}
+.form-group textarea { height: 120px; resize: vertical; }
+.form-submit {
+  width: 100%; background: var(--navy); color: var(--white);
+  padding: 16px; border: none; border-radius: 6px; font-family: 'Montserrat', sans-serif;
+  font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  cursor: pointer; transition: all 0.3s;
+}
+.form-submit:hover { background: var(--navy-light); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--navy-deep); padding: 60px 8% 30px;
+  border-top: 2px solid var(--gold);
+}
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 48px;
+}
+.footer-brand p { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.8; margin: 16px 0 24px; }
+.footer-heading { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; }
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 10px; }
+.footer-links a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.3s; }
+.footer-links a:hover { color: var(--gold); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: gap;
+}
+.footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.4); }
+.footer-bottom .gold-text { color: var(--gold); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in { animation: fadeInUp 0.7s ease forwards; }
+.fade-in-delay-1 { animation: fadeInUp 0.7s ease 0.1s both; }
+.fade-in-delay-2 { animation: fadeInUp 0.7s ease 0.2s both; }
+.fade-in-delay-3 { animation: fadeInUp 0.7s ease 0.3s both; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .hero-content { grid-template-columns: 1fr; gap: 40px; }
+  .offers-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr 1fr; }
+  .about-content { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .nav-links { display: none; }
+}
+@media (max-width: 600px) {
+  .why-grid { grid-template-columns: 1fr; }
+  .values-grid { grid-template-columns: 1fr; }
+  .section { padding: 60px 5%; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav>
+  <a href="#" class="nav-logo" onclick="showPage('home')">
+    <div class="nav-logo-icon">🔍</div>
+    <div class="nav-logo-text">
+      <span>STRAT FOCUS CONSULTING</span>
+      <span>STFC EXPERTISE</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home')" class="active" id="nav-home" data-fr="Accueil" data-en="Home" data-pt="Início">Accueil</a></li>
+    <li><a href="#" onclick="showPage('offers')" id="nav-offers" data-fr="Nos Offres" data-en="Our Services" data-pt="Serviços">Nos Offres</a></li>
+    <li><a href="#" onclick="showPage('about')" id="nav-about" data-fr="À Propos" data-en="About" data-pt="Sobre">À Propos</a></li>
+    <li><a href="#" onclick="showPage('contact')" id="nav-contact" data-fr="Contact" data-en="Contact" data-pt="Contato">Contact</a></li>
+  </ul>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('fr')">FR</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('pt')">PT</button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- PAGE : ACCUEIL -->
+<!-- ══════════════════════════════════════════ -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-tag">
+          <span>🔍</span>
+          <span data-fr="Cabinet de Conseil — Pointe-Noire, Congo" data-en="Consulting Firm — Pointe-Noire, Congo" data-pt="Consultoria — Pointe-Noire, Congo">Cabinet de Conseil — Pointe-Noire, Congo</span>
+        </div>
+        <h1 class="hero-title">
+          <span data-fr="Propulsons votre" data-en="Let's propel your" data-pt="Impulsionamos o seu">Propulsons votre</span><br>
+          <span class="gold" data-fr="Croissance Commerciale" data-en="Commercial Growth" data-pt="Crescimento Comercial">Croissance Commerciale</span>
+        </h1>
+        <p class="hero-subtitle" data-fr="Nous accompagnons les dirigeants de PME congolaises qui veulent accroître leur chiffre d'affaires, conquérir de nouveaux marchés et bâtir des équipes durablement performantes." data-en="We support Congolese SME leaders who want to grow their revenue, conquer new markets and build sustainably high-performing teams." data-pt="Apoiamos líderes de PMEs congolesas que querem aumentar seu faturamento, conquistar novos mercados e construir equipes de alto desempenho.">
+          Nous accompagnons les dirigeants de PME congolaises qui veulent accroître leur chiffre d'affaires, conquérir de nouveaux marchés et bâtir des équipes durablement performantes.
+        </p>
+        <div class="hero-promise">
+          <p data-fr="« Nous propulsons votre potentiel commercial en croissance réelle — jusqu'à +30% de chiffre d'affaires en quelques mois. »" data-en="« We propel your commercial potential into real growth — up to +30% revenue in just a few months. »" data-pt="« Impulsionamos o seu potencial comercial em crescimento real — até +30% de faturamento em poucos meses. »">
+            « Nous propulsons votre potentiel commercial en croissance réelle — jusqu'à +30% de chiffre d'affaires en quelques mois. »
+          </p>
+        </div>
+        <div class="hero-cta">
+          <a href="#" onclick="showPage('contact')" class="btn-primary" data-fr="Échange Gratuit" data-en="Free Consultation" data-pt="Consulta Gratuita">Échange Gratuit</a>
+          <a href="#" onclick="showPage('offers')" class="btn-secondary" data-fr="Nos Offres" data-en="Our Services" data-pt="Nossos Serviços">Nos Offres</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-stat-card">
+          <div class="hero-stat-number">+30%</div>
+          <div class="hero-stat-label" data-fr="DE CROISSANCE CA EN QUELQUES MOIS" data-en="REVENUE GROWTH IN A FEW MONTHS" data-pt="DE CRESCIMENTO EM POUCOS MESES">DE CROISSANCE CA EN QUELQUES MOIS</div>
+        </div>
+        <div class="hero-stat-card">
+          <div class="hero-stat-number">5 ans</div>
+          <div class="hero-stat-label" data-fr="D'EXPERTISE EN CONSEIL COMMERCIAL" data-en="OF COMMERCIAL CONSULTING EXPERTISE" data-pt="DE EXPERTISE EM CONSULTORIA COMERCIAL">D'EXPERTISE EN CONSEIL COMMERCIAL</div>
+        </div>
+        <div class="hero-stat-card">
+          <div class="hero-stat-number">3</div>
+          <div class="hero-stat-label" data-fr="OFFRES SUR MESURE POUR PME" data-en="TAILORED OFFERS FOR SMES" data-pt="OFERTAS SOB MEDIDA PARA PMEs">OFFRES SUR MESURE POUR PME</div>
+        </div>
+        <div class="hero-sectors">
+          <span class="sector-pill">🏭 <span data-fr="Industrie" data-en="Industry" data-pt="Indústria">Industrie</span></span>
+          <span class="sector-pill">🛎️ <span data-fr="Services" data-en="Services" data-pt="Serviços">Services</span></span>
+          <span class="sector-pill">💻 Tech</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFFRES APERÇU -->
+  <section class="section section-white">
+    <div style="max-width:1200px;margin:0 auto">
+      <div class="section-header centered">
+        <span class="section-label" data-fr="Nos Offres" data-en="Our Services" data-pt="Nossos Serviços">Nos Offres</span>
+        <h2 class="section-title dark" data-fr="Trois offres, une seule ambition" data-en="Three services, one ambition" data-pt="Três ofertas, uma só ambição">Trois offres, une seule ambition</h2>
+        <p class="section-subtitle" data-fr="Chaque offre est construite pour répondre à un besoin précis — et les trois s'enchaînent logiquement pour vous amener du diagnostic à la performance durable." data-en="Each service is built to address a specific need — and the three link logically to take you from diagnosis to sustainable performance." data-pt="Cada oferta é construída para atender a uma necessidade específica — e as três se encadeiam logicamente para levá-lo do diagnóstico ao desempenho sustentável.">
+          Chaque offre est construite pour répondre à un besoin précis — et les trois s'enchaînent logiquement pour vous amener du diagnostic à la performance durable.
+        </p>
+      </div>
+      <div class="offers-grid">
+        <div class="offer-card fade-in-delay-1">
+          <div class="offer-card-header navy">
+            <span class="offer-icon">🚪</span>
+            <div class="offer-name white">STFC AUDIT</div>
+            <div class="offer-tagline gold-c" data-fr="Comprendre exactement où vous en êtes" data-en="Understand exactly where you stand" data-pt="Entender exatamente onde você está">Comprendre exactement où vous en êtes</div>
+          </div>
+          <div class="offer-card-body">
+            <div class="offer-meta">
+              <div class="offer-meta-item"><strong data-fr="Durée" data-en="Duration" data-pt="Duração">Durée</strong> : 1 mois</div>
+              <div class="offer-meta-item"><strong data-fr="Public" data-en="Audience" data-pt="Público">Public</strong> : CEO / DG</div>
+            </div>
+            <ul class="offer-livrables">
+              <li data-fr="Rapport d'audit commercial & marketing" data-en="Commercial & marketing audit report" data-pt="Relatório de auditoria comercial e marketing">Rapport d'audit commercial & marketing</li>
+              <li data-fr="Cartographie de vos KPI actuels" data-en="Mapping of your current KPIs" data-pt="Mapeamento dos seus KPIs atuais">Cartographie de vos KPI actuels</li>
+              <li data-fr="Analyse de la concurrence" data-en="Competitive analysis" data-pt="Análise da concorrência">Analyse de la concurrence</li>
+              <li data-fr="Feuille de route 90 jours" data-en="90-day roadmap" data-pt="Roteiro de 90 dias">Feuille de route 90 jours</li>
+            </ul>
+            <div class="offer-promise" data-fr="Comprendre exactement où vous en êtes pour mieux repartir." data-en="Understand exactly where you stand to move forward better." data-pt="Entender exatamente onde você está para recomeçar melhor.">Comprendre exactement où vous en êtes pour mieux repartir.</div>
+          </div>
+        </div>
+        <div class="offer-card fade-in-delay-2">
+          <div class="offer-card-header gold">
+            <span class="offer-icon">🚀</span>
+            <div class="offer-name navy">STFC CROISSANCE</div>
+            <div class="offer-tagline navy-c" data-fr="Vous amener là où vous voulez aller" data-en="Take you where you want to go" data-pt="Levá-lo onde você quer chegar">Vous amener là où vous voulez aller</div>
+          </div>
+          <div class="offer-card-body">
+            <div class="offer-meta">
+              <div class="offer-meta-item"><strong data-fr="Durée" data-en="Duration" data-pt="Duração">Durée</strong> : 3–12 mois</div>
+              <div class="offer-meta-item"><strong data-fr="Public" data-en="Audience" data-pt="Público">Public</strong> : CEO + Dir. Commercial</div>
+            </div>
+            <ul class="offer-livrables">
+              <li data-fr="Plan d'Action Commerciale (PAC)" data-en="Commercial Action Plan (CAP)" data-pt="Plano de Ação Comercial (PAC)">Plan d'Action Commerciale (PAC)</li>
+              <li data-fr="CRM configuré sur mesure" data-en="Custom CRM configuration" data-pt="CRM configurado sob medida">CRM configuré sur mesure</li>
+              <li data-fr="Tableaux de bord de pilotage" data-en="Performance dashboards" data-pt="Painéis de controle de desempenho">Tableaux de bord de pilotage</li>
+              <li data-fr="Plan de conquête de nouveaux marchés" data-en="New market conquest plan" data-pt="Plano de conquista de novos mercados">Plan de conquête de nouveaux marchés</li>
+            </ul>
+            <div class="offer-promise" data-fr="Transformer votre potentiel en croissance réelle et mesurable." data-en="Transform your potential into real, measurable growth." data-pt="Transformar seu potencial em crescimento real e mensurável.">Transformer votre potentiel en croissance réelle et mesurable.</div>
+          </div>
+        </div>
+        <div class="offer-card fade-in-delay-3">
+          <div class="offer-card-header light">
+            <span class="offer-icon">🧠</span>
+            <div class="offer-name navy">STFC ACADEMY</div>
+            <div class="offer-tagline navy-c" data-fr="Rendre vos équipes autonomes et performantes" data-en="Make your teams autonomous and high-performing" data-pt="Tornar suas equipes autônomas e de alto desempenho">Rendre vos équipes autonomes et performantes</div>
+          </div>
+          <div class="offer-card-body">
+            <div class="offer-meta">
+              <div class="offer-meta-item"><strong data-fr="Durée" data-en="Duration" data-pt="Duração">Durée</strong> : 1–3 mois</div>
+              <div class="offer-meta-item"><strong data-fr="Public" data-en="Audience" data-pt="Público">Public</strong> : <span data-fr="Équipes commerciales" data-en="Sales teams" data-pt="Equipes comerciais">Équipes commerciales</span></div>
+            </div>
+            <ul class="offer-livrables">
+              <li data-fr="Programmes de formation sur mesure" data-en="Custom training programs" data-pt="Programas de treinamento sob medida">Programmes de formation sur mesure</li>
+              <li data-fr="Scripts de vente personnalisés" data-en="Personalized sales scripts" data-pt="Scripts de vendas personalizados">Scripts de vente personnalisés</li>
+              <li data-fr="Évaluations individuelles et collectives" data-en="Individual and group assessments" data-pt="Avaliações individuais e coletivas">Évaluations individuelles et collectives</li>
+              <li data-fr="Attestations STFC" data-en="STFC Certificates" data-pt="Certificados STFC">Attestations STFC</li>
+            </ul>
+            <div class="offer-promise" data-fr="Des équipes qui vendent mieux, plus vite et de façon autonome." data-en="Teams that sell better, faster and autonomously." data-pt="Equipes que vendem melhor, mais rápido e de forma autônoma.">Des équipes qui vendent mieux, plus vite et de façon autonome.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POURQUOI NOUS -->
+  <section class="section section-navy">
+    <div style="max-width:1100px;margin:0 auto">
+      <div class="section-header centered">
+        <span class="section-label" data-fr="Notre Différence" data-en="Our Difference" data-pt="Nossa Diferença">Notre Différence</span>
+        <h2 class="section-title light" data-fr="Pourquoi choisir STRAT FOCUS CONSULTING ?" data-en="Why choose STRAT FOCUS CONSULTING?" data-pt="Por que escolher a STRAT FOCUS CONSULTING?">Pourquoi choisir STRAT FOCUS CONSULTING ?</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card"><span class="why-icon">🎯</span><div class="why-title" data-fr="Approche 100% sur mesure" data-en="100% tailored approach" data-pt="Abordagem 100% personalizada">Approche 100% sur mesure</div><div class="why-desc" data-fr="Aucune solution standardisée — tout est construit selon votre réalité, vos contraintes et vos ambitions." data-en="No standardized solutions — everything is built around your reality, constraints and ambitions." data-pt="Sem soluções padronizadas — tudo é construído de acordo com sua realidade, restrições e ambições.">Aucune solution standardisée — tout est construit selon votre réalité, vos contraintes et vos ambitions.</div></div>
+        <div class="why-card"><span class="why-icon">📊</span><div class="why-title" data-fr="Orienté résultats mesurables" data-en="Results-oriented" data-pt="Orientado a resultados mensuráveis">Orienté résultats mesurables</div><div class="why-desc" data-fr="Nous travaillons sur des objectifs chiffrés et vérifiables. Pas de vagues promesses — des résultats concrets." data-en="We work with specific, verifiable goals. No vague promises — concrete results." data-pt="Trabalhamos com metas específicas e verificáveis. Sem promessas vagas — resultados concretos.">Nous travaillons sur des objectifs chiffrés et vérifiables. Pas de vagues promesses — des résultats concrets.</div></div>
+        <div class="why-card"><span class="why-icon">🤝</span><div class="why-title" data-fr="Partenaire externe engagé" data-en="Committed external partner" data-pt="Parceiro externo comprometido">Partenaire externe engagé</div><div class="why-desc" data-fr="Nous nous impliquons comme si c'était notre propre entreprise — avec la même passion et le même niveau d'exigence." data-en="We engage as if it were our own business — with the same passion and level of commitment." data-pt="Nos envolvemos como se fosse nossa própria empresa — com a mesma paixão e nível de exigência.">Nous nous impliquons comme si c'était notre propre entreprise.</div></div>
+        <div class="why-card"><span class="why-icon">🔍</span><div class="why-title" data-fr="Regard neuf et expert" data-en="Fresh expert perspective" data-pt="Perspectiva especializada e nova">Regard neuf et expert</div><div class="why-desc" data-fr="Nous voyons ce que vous ne pouvez pas voir de l'intérieur — et nous transformons ces angles morts en opportunités." data-en="We see what you can't see from the inside — and turn those blind spots into opportunities." data-pt="Vemos o que você não consegue ver por dentro — e transformamos esses pontos cegos em oportunidades.">Nous voyons ce que vous ne pouvez pas voir de l'intérieur.</div></div>
+        <div class="why-card"><span class="why-icon">⚡</span><div class="why-title" data-fr="Réactivité et proximité" data-en="Responsiveness & proximity" data-pt="Reatividade e proximidade">Réactivité et proximité</div><div class="why-desc" data-fr="Un interlocuteur unique, disponible et ancré dans le contexte économique congolais." data-en="A single point of contact, available and rooted in the Congolese business context." data-pt="Um único ponto de contato, disponível e enraizado no contexto econômico congolês.">Un interlocuteur unique, disponible et ancré dans le contexte congolais.</div></div>
+        <div class="why-card"><span class="why-icon">🏆</span><div class="why-title" data-fr="Expertise multi-sectorielle" data-en="Multi-sector expertise" data-pt="Expertise multissetorial">Expertise multi-sectorielle</div><div class="why-desc" data-fr="Industrie, Services et Tech — une polyvalence rare au service de votre croissance spécifique." data-en="Industry, Services and Tech — a rare versatility in service of your specific growth." data-pt="Indústria, Serviços e Tecnologia — uma versatilidade rara a serviço do seu crescimento específico.">Industrie, Services et Tech — une polyvalence au service de votre croissance.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section style="background:var(--gold-pale);padding:80px 8%;text-align:center;">
+    <span class="section-label" data-fr="Passez à l'action" data-en="Take action" data-pt="Entre em ação">Passez à l'action</span>
+    <h2 class="section-title dark" style="max-width:600px;margin:0 auto 20px;" data-fr="Prêt à propulser votre croissance ?" data-en="Ready to propel your growth?" data-pt="Pronto para impulsionar seu crescimento?">Prêt à propulser votre croissance ?</h2>
+    <p style="font-size:15px;color:var(--gray-text);margin-bottom:40px;max-width:500px;margin-left:auto;margin-right:auto;" data-fr="La première étape est simple : parlons de votre entreprise, de vos ambitions et de vos défis." data-en="The first step is simple: let's talk about your business, your ambitions and your challenges." data-pt="O primeiro passo é simples: vamos conversar sobre sua empresa, suas ambições e seus desafios.">La première étape est simple : parlons de votre entreprise, de vos ambitions et de vos défis.</p>
+    <a href="#" onclick="showPage('contact')" class="btn-primary" data-fr="Premier échange gratuit" data-en="Free first consultation" data-pt="Primeira consulta gratuita">Premier échange gratuit</a>
+  </section>
+
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- PAGE : NOS OFFRES -->
+<!-- ══════════════════════════════════════════ -->
+<div id="page-offers" class="page">
+  <section class="offers-page-hero">
+    <div style="position:relative;z-index:2;max-width:800px;margin:0 auto">
+      <span class="section-label" data-fr="Nos Offres" data-en="Our Services" data-pt="Nossos Serviços">Nos Offres</span>
+      <h1 class="section-title light" data-fr="Trois offres. Une seule mission." data-en="Three services. One mission." data-pt="Três ofertas. Uma missão.">Trois offres. Une seule mission.</h1>
+      <p class="section-subtitle light" style="margin:0 auto" data-fr="Propulser votre performance commerciale et marketing vers de nouveaux sommets." data-en="Propel your commercial and marketing performance to new heights." data-pt="Impulsionar seu desempenho comercial e de marketing a novos patamares.">Propulser votre performance commerciale et marketing vers de nouveaux sommets.</p>
+      <div class="offers-flow">
+        <div class="flow-item"><div class="icon">🚪</div><div class="name">STFC AUDIT</div><div class="desc" data-fr="Porte d'entrée" data-en="Entry point" data-pt="Ponto de entrada">Porte d'entrée</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-item"><div class="icon">🚀</div><div class="name">STFC CROISSANCE</div><div class="desc" data-fr="Moteur de croissance" data-en="Growth engine" data-pt="Motor de crescimento">Moteur de croissance</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-item"><div class="icon">🧠</div><div class="name">STFC ACADEMY</div><div class="desc" data-fr="Accélérateur humain" data-en="Human accelerator" data-pt="Acelerador humano">Accélérateur humain</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-white">
+    <div style="max-width:1200px;margin:0 auto">
+      <div class="offers-grid">
+        <div class="offer-card">
+          <div class="offer-card-header navy">
+            <span class="offer-icon">🚪</span>
+            <div class="offer-name white">STFC AUDIT</div>
+            <div class="offer-tagline gold-c" data-fr="Comprendre exactement où vous en êtes" data-en="Understand exactly where you stand" data-pt="Entender exatamente onde você está">Comprendre exactement où vous en êtes</div>
+          </div>
+          <div class="offer-card-body">
+            <div class="offer-meta">
+              <div class="offer-meta-item"><strong data-fr="Durée" data-en="Duration" data-pt="Duração">Durée</strong> : 1 mois</div>
+              <div class="offer-meta-item"><strong data-fr="Public" data-en="Audience" data-pt="Público">Public</strong> : CEO / DG</div>
+            </div>
+            <ul class="offer-livrables">
+              <li data-fr="Rapport d'audit commercial & marketing complet" data-en="Full commercial & marketing audit report" data-pt="Relatório completo de auditoria comercial e marketing">Rapport d'audit commercial & marketing complet</li>
+              <li data-fr="Cartographie de vos KPI actuels" data-en="Mapping of your current KPIs" data-pt="Mapeamento dos seus KPIs atuais">Cartographie de vos KPI actuels</li>
+              <li data-fr="Analyse comparative de la concurrence" data-en="Competitive benchmarking analysis" data-pt="Análise comparativa da concorrência">Analyse comparative de la concurrence</li>
+              <li data-fr="Diagnostic de vos équipes commerciales" data-en="Sales team diagnostic" data-pt="Diagnóstico das suas equipes comerciais">Diagnostic de vos équipes commerciales</li>
+              <li data-fr="Rapport de recommandations prioritaires" data-en="Priority recommendations report" data-pt="Relatório de recomendações prioritárias">Rapport de recommandations prioritaires</li>
+              <li data-fr="Séance de restitution devant la direction" data-en="Management debrief session" data-pt="Sessão de apresentação para a direção">Séance de restitution devant la direction</li>
+              <li data-fr="Feuille de route opérationnelle sur 90 jours" data-en="90-day operational roadmap" data-pt="Roteiro operacional de 90 dias">Feuille de route opérationnelle sur 90 jours</li>
+            </ul>
+            <div class="offer-promise" data-fr="Comprendre exactement où vous en êtes pour mieux repartir." data-en="Understand exactly where you stand to move forward better." data-pt="Entender exatamente onde você está para recomeçar melhor.">Comprendre exactement où vous en êtes pour mieux repartir.</div>
+          </div>
+        </div>
+        <div class="offer-card">
+          <div class="offer-card-header gold">
+            <span class="offer-icon">🚀</span>
+            <div class="offer-name navy">STFC CROISSANCE</div>
+            <div class="offer-tagline navy-c" data-fr="Vous amener là où vous voulez aller" data-en="Take you where you want to go" data-pt="Levá-lo onde você quer chegar">Vous amener là où vous voulez aller</div>
+          </div>
+          <div class="offer-card-body">
+            <div class="offer-meta">
+              <div class="offer-meta-item"><strong data-fr="Durée" data-en="Duration" data-pt="Duração">Durée</strong> : 3–12 mois</div>
+              <div class="offer-meta-item"><strong>Public</strong> : CEO + Dir. Commercial</div>
+            </div>
+            <ul class="offer-livrables">
+              <li data-fr="Plan d'Action Commerciale (PAC) complet" data-en="Full Commercial Action Plan (CAP)" data-pt="Plano de Ação Comercial (PAC) completo">Plan d'Action Commerciale (PAC) complet</li>
+              <li data-fr="Stratégie marketing opérationnelle sur mesure" data-en="Custom operational marketing strategy" data-pt="Estratégia de marketing operacional sob medida">Stratégie marketing opérationnelle sur mesure</li>
+              <li data-fr="CRM configuré et adapté à votre structure" data-en="CRM configured for your structure" data-pt="CRM configurado e adaptado à sua estrutura">CRM configuré et adapté à votre structure</li>
+              <li data-fr="Tableaux de bord de pilotage de la performance" data-en="Performance management dashboards" data-pt="Painéis de gestão de desempenho">Tableaux de bord de pilotage de la performance</li>
+              <li data-fr="Rapports mensuels de performance commentés" data-en="Commented monthly performance reports" data-pt="Relatórios mensais de desempenho comentados">Rapports mensuels de performance commentés</li>
+              <li data-fr="Plan de conquête de nouveaux marchés" data-en="New market conquest plan" data-pt="Plano de conquista de novos mercados">Plan de conquête de nouveaux marchés</li>
+              <li data-fr="Accompagnement régulier du dirigeant" data-en="Regular executive coaching" data-pt="Acompanhamento regular do dirigente">Accompagnement régulier du dirigeant</li>
+              <li data-fr="Bilan de mission complet en fin d'intervention" data-en="Full end-of-mission report" data-pt="Relatório final completo da missão">Bilan de mission complet en fin d'intervention</li>
+            </ul>
+            <div class="offer-promise" data-fr="Transformer votre potentiel en croissance réelle et mesurable." data-en="Transform your potential into real, measurable growth." data-pt="Transformar seu potencial em crescimento real e mensurável.">Transformer votre potentiel en croissance réelle et mesurable.</div>
+          </div>
+        </div>
+        <div class="offer-card">
+          <div class="offer-card-header light">
+            <span class="offer-icon">🧠</span>
+            <div class="offer-name navy">STFC ACADEMY</div>
+            <div class="offer-tagline navy-c" data-fr="Rendre vos équipes autonomes et performantes" data-en="Make your teams autonomous and high-performing" data-pt="Tornar suas equipes autônomas e de alto desempenho">Rendre vos équipes autonomes et performantes</div>
+          </div>
+          <div class="offer-card-body">
+            <div class="offer-meta">
+              <div class="offer-meta-item"><strong data-fr="Durée" data-en="Duration" data-pt="Duração">Durée</strong> : 1–3 mois</div>
+              <div class="offer-meta-item"><strong data-fr="Public" data-en="Audience" data-pt="Público">Public</strong> : <span data-fr="Équipes commerciales" data-en="Sales teams" data-pt="Equipes comerciais">Équipes commerciales</span></div>
+            </div>
+            <ul class="offer-livrables">
+              <li data-fr="Programmes de formation sur mesure" data-en="Custom training programs" data-pt="Programas de treinamento sob medida">Programmes de formation sur mesure</li>
+              <li data-fr="Supports pédagogiques illustrés et pratiques" data-en="Illustrated practical training materials" data-pt="Materiais pedagógicos ilustrados e práticos">Supports pédagogiques illustrés et pratiques</li>
+              <li data-fr="Cas pratiques basés sur votre secteur" data-en="Sector-specific case studies" data-pt="Casos práticos baseados no seu setor">Cas pratiques basés sur votre secteur</li>
+              <li data-fr="Scripts de vente et fiches objections-réponses" data-en="Sales scripts and objection-handling sheets" data-pt="Scripts de vendas e fichas de objeções-respostas">Scripts de vente et fiches objections-réponses</li>
+              <li data-fr="Évaluations avant, pendant et après formation" data-en="Pre, during and post-training assessments" data-pt="Avaliações antes, durante e após o treinamento">Évaluations avant, pendant et après formation</li>
+              <li data-fr="Rapports individuels et collectifs de compétences" data-en="Individual and group competency reports" data-pt="Relatórios individuais e coletivos de competências">Rapports individuels et collectifs de compétences</li>
+              <li data-fr="Sessions de coaching post-formation" data-en="Post-training coaching sessions" data-pt="Sessões de coaching pós-treinamento">Sessions de coaching post-formation</li>
+              <li data-fr="Attestations individuelles STFC" data-en="Individual STFC certificates" data-pt="Certificados individuais STFC">Attestations individuelles STFC</li>
+            </ul>
+            <div class="offer-promise" data-fr="Des équipes qui vendent mieux, plus vite et de façon autonome." data-en="Teams that sell better, faster and autonomously." data-pt="Equipes que vendem melhor, mais rápido e de forma autônoma.">Des équipes qui vendent mieux, plus vite et de façon autonome.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- PAGE : À PROPOS -->
+<!-- ══════════════════════════════════════════ -->
+<div id="page-about" class="page">
+  <section class="about-hero">
+    <div style="position:relative;z-index:2">
+      <span class="section-label" data-fr="À Propos" data-en="About Us" data-pt="Sobre Nós">À Propos</span>
+      <h1 class="section-title light" data-fr="Notre histoire, notre mission" data-en="Our story, our mission" data-pt="Nossa história, nossa missão">Notre histoire, notre mission</h1>
+      <p class="section-subtitle light" style="margin:0 auto;max-width:600px" data-fr="Derrière STRAT FOCUS CONSULTING, un consultant passionné et engagé — Rodriguez MOKHASSA." data-en="Behind STRAT FOCUS CONSULTING, a passionate and committed consultant — Rodriguez MOKHASSA." data-pt="Por trás da STRAT FOCUS CONSULTING, um consultor apaixonado e comprometido — Rodriguez MOKHASSA.">Derrière STRAT FOCUS CONSULTING, un consultant passionné et engagé — Rodriguez MOKHASSA.</p>
+    </div>
+  </section>
+
+  <section class="section section-white">
+    <div class="about-content">
+      <div class="about-founder">
+        <div class="founder-avatar">👤</div>
+        <div class="founder-name">Rodriguez MOKHASSA</div>
+        <div class="founder-title" data-fr="FONDATEUR & CONSULTANT EXPERT" data-en="FOUNDER & EXPERT CONSULTANT" data-pt="FUNDADOR & CONSULTOR ESPECIALISTA">FONDATEUR & CONSULTANT EXPERT</div>
+        <p class="founder-bio" data-fr="Fort de 5 ans d'expérience en conseil commercial et marketing, Rodriguez MOKHASSA accompagne les dirigeants de PME congolaises dans les secteurs Industrie, Services et Tech. Sa conviction profonde : chaque PME congolaise a un potentiel de croissance inexploité — et son rôle est de le révéler et de le transformer en résultats concrets." data-en="With 5 years of experience in commercial and marketing consulting, Rodriguez MOKHASSA supports Congolese SME leaders in the Industry, Services and Tech sectors. His deep conviction: every Congolese SME has untapped growth potential — and his role is to reveal it and transform it into concrete results." data-pt="Com 5 anos de experiência em consultoria comercial e de marketing, Rodriguez MOKHASSA apoia líderes de PMEs congolesas nos setores de Indústria, Serviços e Tecnologia. Sua convicção profunda: toda PME congolesa tem potencial de crescimento inexplorado — e seu papel é revelá-lo e transformá-lo em resultados concretos.">
+          Fort de 5 ans d'expérience en conseil commercial et marketing, Rodriguez MOKHASSA accompagne les dirigeants de PME congolaises dans les secteurs Industrie, Services et Tech. Sa conviction profonde : chaque PME congolaise a un potentiel de croissance inexploité — et son rôle est de le révéler et de le transformer en résultats concrets.
+        </p>
+      </div>
+      <div class="about-text">
+        <span class="section-label" data-fr="Notre Cabinet" data-en="Our Firm" data-pt="Nossa Consultoria">Notre Cabinet</span>
+        <h2 class="section-title dark" data-fr="STRAT FOCUS CONSULTING" data-en="STRAT FOCUS CONSULTING" data-pt="STRAT FOCUS CONSULTING">STRAT FOCUS CONSULTING</h2>
+        <p data-fr="STRAT FOCUS CONSULTING est un cabinet de conseil spécialisé en performance commerciale et marketing d'innovation, basé à Pointe-Noire, en République du Congo. Nous intervenons auprès des PME des secteurs Industrie, Services et Tech." data-en="STRAT FOCUS CONSULTING is a consulting firm specializing in commercial performance and innovation marketing, based in Pointe-Noire, Republic of Congo. We work with SMEs in the Industry, Services and Tech sectors." data-pt="A STRAT FOCUS CONSULTING é uma consultoria especializada em desempenho comercial e marketing de inovação, sediada em Pointe-Noire, República do Congo. Atuamos junto a PMEs dos setores de Indústria, Serviços e Tecnologia.">
+          STRAT FOCUS CONSULTING est un cabinet de conseil spécialisé en performance commerciale et marketing d'innovation, basé à Pointe-Noire, en République du Congo.
+        </p>
+        <p data-fr="Notre approche est résolument sur mesure : nous ne proposons pas de solutions toutes faites. Nous construisons avec chaque dirigeant la stratégie qui correspond exactement à sa situation, son secteur et ses objectifs." data-en="Our approach is resolutely tailored: we don't offer off-the-shelf solutions. We build with each leader the strategy that exactly matches their situation, sector and goals." data-pt="Nossa abordagem é resolutamente personalizada: não oferecemos soluções prontas. Construímos com cada líder a estratégia que corresponde exatamente à sua situação, setor e objetivos.">
+          Notre approche est résolument sur mesure : nous ne proposons pas de solutions toutes faites. Nous construisons avec chaque dirigeant la stratégie qui correspond exactement à sa situation, son secteur et ses objectifs.
+        </p>
+        <div class="values-grid">
+          <div class="value-item"><div class="value-title" data-fr="Excellence" data-en="Excellence" data-pt="Excelência">Excellence</div><div class="value-desc" data-fr="Chaque mission est réalisée avec le plus haut niveau d'exigence professionnelle." data-en="Every mission is carried out with the highest level of professional standards." data-pt="Cada missão é realizada com o mais alto nível de exigência profissional.">Chaque mission est réalisée avec le plus haut niveau d'exigence professionnelle.</div></div>
+          <div class="value-item"><div class="value-title" data-fr="Engagement" data-en="Commitment" data-pt="Comprometimento">Engagement</div><div class="value-desc" data-fr="Nous nous impliquons comme si c'était notre propre entreprise." data-en="We engage as if it were our own business." data-pt="Nos envolvemos como se fosse nossa própria empresa.">Nous nous impliquons comme si c'était notre propre entreprise.</div></div>
+          <div class="value-item"><div class="value-title" data-fr="Transparence" data-en="Transparency" data-pt="Transparência">Transparence</div><div class="value-desc" data-fr="Une communication honnête, des résultats mesurables et vérifiables." data-en="Honest communication, measurable and verifiable results." data-pt="Comunicação honesta, resultados mensuráveis e verificáveis.">Une communication honnête, des résultats mesurables.</div></div>
+          <div class="value-item"><div class="value-title" data-fr="Proximité" data-en="Proximity" data-pt="Proximidade">Proximité</div><div class="value-desc" data-fr="Ancrés dans la réalité du marché congolais, nous parlons votre langue." data-en="Rooted in the Congolese market reality, we speak your language." data-pt="Enraizados na realidade do mercado congolês, falamos a sua língua.">Ancrés dans la réalité du marché congolais.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- PAGE : CONTACT -->
+<!-- ══════════════════════════════════════════ -->
+<div id="page-contact" class="page">
+  <section class="contact-hero">
+    <span class="section-label" data-fr="Contact" data-en="Contact" data-pt="Contato">Contact</span>
+    <h1 class="section-title light" data-fr="Parlons de votre croissance" data-en="Let's talk about your growth" data-pt="Vamos falar sobre o seu crescimento">Parlons de votre croissance</h1>
+    <p class="section-subtitle light" style="margin:0 auto;max-width:500px" data-fr="La première étape est simple : parlons de votre entreprise, de vos ambitions et de vos défis. Le reste, c'est notre métier." data-en="The first step is simple: let's talk about your business, your ambitions and your challenges. The rest is our business." data-pt="O primeiro passo é simples: vamos falar sobre sua empresa, suas ambições e seus desafios. O resto é o nosso negócio.">La première étape est simple : parlons de votre entreprise, de vos ambitions et de vos défis.</p>
+  </section>
+
+  <section class="section section-white">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3 data-fr="Nos coordonnées" data-en="Our contact details" data-pt="Nossos contatos">Nos coordonnées</h3>
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div class="contact-item-text">
+            <strong data-fr="Adresse" data-en="Address" data-pt="Endereço">Adresse</strong>
+            <span>Pointe-Noire, République du Congo</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📞</div>
+          <div class="contact-item-text">
+            <strong data-fr="Téléphone" data-en="Phone" data-pt="Telefone">Téléphone</strong>
+            <span data-fr="À compléter" data-en="To be completed" data-pt="A completar">À compléter</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📧</div>
+          <div class="contact-item-text">
+            <strong>Email</strong>
+            <span data-fr="À compléter" data-en="To be completed" data-pt="A completar">À compléter</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">💼</div>
+          <div class="contact-item-text">
+            <strong>LinkedIn</strong>
+            <span data-fr="À compléter" data-en="To be completed" data-pt="A completar">À compléter</span>
+          </div>
+        </div>
+        <div style="background:var(--navy);border-radius:12px;padding:24px;margin-top:32px;">
+          <p style="font-size:14px;color:var(--gold);font-style:italic;font-family:'Cormorant Garamond',serif;line-height:1.7" data-fr="« Premier échange gratuit et sans engagement — contactez-nous dès aujourd'hui. »" data-en="« Free first consultation with no commitment — contact us today. »" data-pt="« Primeira consulta gratuita e sem compromisso — entre em contato conosco hoje. »">
+            « Premier échange gratuit et sans engagement — contactez-nous dès aujourd'hui. »
+          </p>
+        </div>
+      </div>
+      <div class="contact-form">
+        <h3 data-fr="Envoyez-nous un message" data-en="Send us a message" data-pt="Envie-nos uma mensagem">Envoyez-nous un message</h3>
+        <div class="form-group">
+          <label data-fr="Votre nom complet" data-en="Your full name" data-pt="Seu nome completo">Votre nom complet</label>
+          <input type="text" placeholder="Ex : Jean-Paul MBEMBA">
+        </div>
+        <div class="form-group">
+          <label data-fr="Votre entreprise" data-en="Your company" data-pt="Sua empresa">Votre entreprise</label>
+          <input type="text" placeholder="Ex : MBEMBA Industries SARL">
+        </div>
+        <div class="form-group">
+          <label data-fr="Votre email" data-en="Your email" data-pt="Seu email">Votre email</label>
+          <input type="email" placeholder="exemple@entreprise.com">
+        </div>
+        <div class="form-group">
+          <label data-fr="Offre qui vous intéresse" data-en="Service of interest" data-pt="Serviço de interesse">Offre qui vous intéresse</label>
+          <select>
+            <option data-fr="Choisir une offre..." data-en="Choose a service..." data-pt="Escolha um serviço...">Choisir une offre...</option>
+            <option>STFC Audit</option>
+            <option>STFC Croissance</option>
+            <option>STFC Academy</option>
+            <option data-fr="Les trois offres" data-en="All three services" data-pt="As três ofertas">Les trois offres</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label data-fr="Votre message" data-en="Your message" data-pt="Sua mensagem">Votre message</label>
+          <textarea placeholder="Décrivez brièvement votre situation et vos objectifs..."></textarea>
+        </div>
+        <button class="form-submit" data-fr="Envoyer ma demande" data-en="Send my request" data-pt="Enviar minha solicitação">Envoyer ma demande</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+        <div style="width:38px;height:38px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px">🔍</div>
+        <div>
+          <div style="font-weight:700;font-size:13px;color:var(--white);letter-spacing:1px">STRAT FOCUS CONSULTING</div>
+          <div style="font-size:10px;color:var(--gold);letter-spacing:2px">STFC EXPERTISE</div>
+        </div>
+      </div>
+      <p data-fr="Cabinet de conseil en performance commerciale et marketing d'innovation. Nous propulsons les PME congolaises vers +30% de croissance." data-en="Commercial performance and innovation marketing consulting firm. We propel Congolese SMEs toward +30% growth." data-pt="Consultoria em desempenho comercial e marketing de inovação. Impulsionamos PMEs congolesas para +30% de crescimento.">Cabinet de conseil en performance commerciale et marketing d'innovation. Nous propulsons les PME congolaises vers +30% de croissance.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <span style="font-size:11px;color:rgba(255,255,255,0.5)">🏭 <span data-fr="Industrie" data-en="Industry" data-pt="Indústria">Industrie</span></span>
+        <span style="font-size:11px;color:rgba(255,255,255,0.5)">🛎️ Services</span>
+        <span style="font-size:11px;color:rgba(255,255,255,0.5)">💻 Tech</span>
+      </div>
+    </div>
+    <div>
+      <div class="footer-heading" data-fr="Navigation" data-en="Navigation" data-pt="Navegação">Navigation</div>
+      <ul class="footer-links">
+        <li><a href="#" onclick="showPage('home')" data-fr="Accueil" data-en="Home" data-pt="Início">Accueil</a></li>
+        <li><a href="#" onclick="showPage('offers')" data-fr="Nos Offres" data-en="Our Services" data-pt="Serviços">Nos Offres</a></li>
+        <li><a href="#" onclick="showPage('about')" data-fr="À Propos" data-en="About" data-pt="Sobre">À Propos</a></li>
+        <li><a href="#" onclick="showPage('contact')" data-fr="Contact" data-en="Contact" data-pt="Contato">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading" data-fr="Nos Offres" data-en="Our Services" data-pt="Nossos Serviços">Nos Offres</div>
+      <ul class="footer-links">
+        <li><a href="#" onclick="showPage('offers')">🚪 STFC Audit</a></li>
+        <li><a href="#" onclick="showPage('offers')">🚀 STFC Croissance</a></li>
+        <li><a href="#" onclick="showPage('offers')">🧠 STFC Academy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 <span class="gold-text">STRAT FOCUS CONSULTING</span> — STFC Expertise. <span data-fr="Tous droits réservés." data-en="All rights reserved." data-pt="Todos os direitos reservados.">Tous droits réservés.</span></p>
+    <p style="font-size:12px;color:rgba(255,255,255,0.4)">📍 Pointe-Noire, République du Congo</p>
+  </div>
+</footer>
+
+<script>
+// ── PAGE NAVIGATION ──
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  const navEl = document.getElementById('nav-' + id);
+  if (navEl) navEl.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  return false;
+}
+
+// ── LANGUAGE SWITCHER ──
+let currentLang = 'fr';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.lang-btn').forEach(b => { if (b.textContent === lang.toUpperCase()) b.classList.add('active'); });
+  document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+    const val = el.getAttribute('data-' + lang);
+    if (val) el.textContent = val;
+  });
+  // Update html lang
+  document.documentElement.lang = lang;
+}
+
+// Init
+document.querySelectorAll('nav a').forEach(a => {
+  a.addEventListener('click', function(e) { e.preventDefault(); });
+});
+</script>
+</body>
+</html>
